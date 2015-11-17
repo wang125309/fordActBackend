@@ -1,0 +1,49 @@
+doctype html
+html(lang="en")
+    head
+        meta(http-equiv="Content-Type",content="text/html",charset="utf-8")
+        link(href="/static/css/index.css",rel="stylesheet",type="text/css")
+        script(src="/static/js/index.min.js")
+    body
+        button#add(class="button btn btn-primary",data-toggle="modal",data-target="#edit") 添加
+        div.modal.fade#edit(role="dialog")
+            div.modal-dialog(role="document")
+                form#add-form(method="post",enctype="multipart/form-data",action="/backend/add/")
+                    div.modal-content
+                        div.modal-header
+                            button.close(type="button",data-dismiss="modal",aria-label="Close")
+                                span(aria-hidden="true") &times;
+                            h4.modal-title#myModal 编辑 
+                        div.modal-body
+                            div.title
+                                label(for="title") 标题
+                                input#title.form-control(name="title",placeholder="添加标题")
+                            div.desc
+                                label(for="desc") 描述
+                                input#desc.form-control(name="desc",placeholder="添加描述")
+                            div.URL
+                                label(for="URL") URL 
+                                input#URL.form-control(name="URL",placeholder="添加URL")
+                            div.URL
+                                label(for="file") 文件
+                                input#file.form-input(name="file",type="file")
+                        div.modal-footer
+                            button#sureAdd(type="submit",class="btn btn-primary") 确认添加
+        table.table.table-striped
+            tr
+                th 标题
+                th 描述
+                th URL
+                th 图片
+                th 操作
+
+            {% for i in list %}
+            tr
+                td {{ i.title }}
+                td {{ i.desc }}
+                td {{ i.URL }}
+                td 
+                    img(src="{{ i.file }}")
+                td 
+                    a(href="javascript:;",data-id="{{ i.id }}",class='del') 删除
+            {% endfor %}

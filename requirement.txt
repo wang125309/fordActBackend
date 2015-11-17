@@ -1,0 +1,6 @@
+django
+requests
+django-mysqlpool
+redis
+mysql-python
+django-redis-sessions
